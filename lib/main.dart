@@ -17,20 +17,20 @@ class _QuizzlerState extends State<Quizzler> {
     Question('Lagos is the capital city of nigeria', false),
     Question('I am six feet tall', false),
     Question('i\'m in love with a girl ', true),
-    Question('her name is favour', true)
+    Question('Her name is favour', true)
   ];
 
   int number = 0;
   List<Icon> score = [];
 
   void addScore(bool check) {
+    print(check);
     if (check == true) {
       score.add(Icon(
         Icons.check,
         color: Colors.green,
       ));
-    }
-    if (check == false) {
+    } else {
       score.add(Icon(
         Icons.cancel,
         color: Colors.red,
@@ -78,7 +78,11 @@ class _QuizzlerState extends State<Quizzler> {
                               MaterialStateProperty.all<Color>(Colors.green)),
                       onPressed: () {
                         bool answer = questions[number].a;
-                        addScore(answer);
+                        if (answer == true) {
+                          addScore(true);
+                        } else {
+                          addScore(false);
+                        }
 
                         setState(() {
                           if (number < questions.length) {
@@ -95,8 +99,12 @@ class _QuizzlerState extends State<Quizzler> {
                           backgroundColor:
                               MaterialStateProperty.all<Color>(Colors.red)),
                       onPressed: () {
-                        bool answer = questions[number].a;
-                        addScore(answer);
+                        bool falseAnswer = questions[number].a;
+                        if (falseAnswer == false) {
+                          addScore(true);
+                        } else {
+                          addScore(false);
+                        }
 
                         setState(() {
                           if (number < questions.length) {
